@@ -19,3 +19,5 @@ after_success:
   - docker push xunings/multi-nginx
   - docker push xunings/multi-server
   - docker push xunings/multi-worker
+  - docker push xunings/multi-client
+  - docker push xunings/multi-server
