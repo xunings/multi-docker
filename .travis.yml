@@ -11,7 +11,7 @@ script:
 after_success:
   - docker build -t xunings/multi-client ./client
   - docker build -t xunings/multi-nginx ./nginx
-  - docker build -t xunings/multi-server ./multi-server
+  - docker build -t xunings/multi-server ./server
   - docker build -t xunings/multi-worker ./worker
   # push the built production images to docker hub
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
@@ -19,5 +19,3 @@ after_success:
   - docker push xunings/multi-nginx
   - docker push xunings/multi-server
   - docker push xunings/multi-worker
-  - docker push xunings/multi-client
-  - docker push xunings/multi-server
