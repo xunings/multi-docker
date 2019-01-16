@@ -24,6 +24,8 @@ services:
     security_opt:
       - apparmor=unconfined
     volumes:
+      # keep the dependency folder from being overridden by the volume mapping
+      # the dependency modules are installed during building the Dockerfile.
       - /app/node_modules
       - ./server:/app
     environment:

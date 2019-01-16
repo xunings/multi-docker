@@ -1,0 +1,21 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t xunings/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run xunings/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t xunings/multi-client ./client
+  - docker build -t xunings/multi-nginx ./nginx
+  - docker build -t xunings/multi-server ./multi-server
+  - docker build -t xunings/multi-worker ./worker
+  # push the built production images to docker hub
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push xunings/multi-client
+  - docker push xunings/multi-nginx
+  - docker push xunings/multi-server
+  - docker push xunings/multi-worker
